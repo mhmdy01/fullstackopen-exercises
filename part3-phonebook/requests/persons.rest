@@ -1,0 +1,48 @@
+### read:all
+GET http://localhost:3001/api/persons
+
+### read:one
+GET http://localhost:3001/api/persons/1
+### read:one (wrongid:notfound -> 404)
+GET http://localhost:3001/api/persons/100
+
+### delete:one
+DELETE http://localhost:3001/api/persons/1
+### delete:one (wrongid:notfound -> 404)
+DELETE http://localhost:3001/api/persons/100
+
+### create
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{ "name": "some name", "number": "some number" }
+
+### create: constraints (name missing)
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{ "name": null, "number": "some number" }
+
+### create: constraints (name duplicate)
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{ "name": "name #1", "number": "some number" }
+
+### create: constraints (name wrong len)
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{ "name": "ab", "number": "some number" }
+
+### create: constraints (number missing)
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{ "name": "some name", "number": null }
+
+### create: constraints (number wrong len)
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{ "name": "some name", "number": "123" }
